@@ -6,9 +6,9 @@ import { RegisterAirQuality } from './app/air-quality/air-quality.router'
 export async function main(){
     try{
       if(!fs.existsSync('logs')) fs.mkdirSync('logs')
+      console.clear()
       await load()
       RegisterAirQuality('/air', app)
-      console.clear()
       app.listen(process.env.APP_PORT, () => console.log(`Documentation On: http://localhost:${process.env.APP_PORT}/api`))
     }catch(e){ 
       console.error('And Error Occured: ', e)

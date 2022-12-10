@@ -1,4 +1,3 @@
-import fetch from "node-fetch-commonjs";
 import { AirQuality } from "../models/air-quality.entity";
 import QueryString from 'query-string'
 import { createResponse, DataResponse, message } from "../../../core/response";
@@ -6,10 +5,11 @@ import { StatusCodes } from "http-status-codes";
 import { FindAirQualityDto } from "../models/dto/find-air-quality.dto";
 import { logger } from "../../../modules/logger/logger.module";
 import { DateTimeDto } from "../models/dto/datetime.dto";
+import { Response } from 'node-fetch-commonjs'
 
 export class AirQualityService{
 
-    constructor(private Model: AirQuality){}
+    constructor(private Model: AirQuality, private fetch: (url: RequestInfo | string, init: RequestInit) => Promise<Response>){}
 
     public async save(){
         try{
@@ -23,10 +23,11 @@ export class AirQualityService{
     public async findAirQuality(lat: number, lon: number): Promise<DataResponse<{result: {pollution: FindAirQualityDto}}>>{
         try{
             const query = QueryString.stringify({ lat, lon, key: process.env.API_KEY })
-            const res = await fetch(process.env.BASE_URI + '/v2/nearest_city?' + query, { method: 'GET' })
+            const res = await this.fetch(process.env.BASE_URI + '/v2/nearest_city?' + query, { method: 'GET' })
+            if(res.status >= 400) throw {status: res.status, data: await res.json() }
             const pollution = (await res.json() as any).data.current.pollution as FindAirQualityDto
             return createResponse(StatusCodes.OK, {result: {pollution}})
-        }catch(e){ throw createResponse(StatusCodes.INTERNAL_SERVER_ERROR, e) }
+        }catch(e: any){ throw createResponse(e.status, e.data) }
     }
 
     public async findParisAirQuality(): Promise<DataResponse<FindAirQualityDto[]>>{

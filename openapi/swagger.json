@@ -42,8 +42,7 @@
 				"type": "object",
 				"additionalProperties": false
 			}
-		},
-		"securitySchemes": {}
+		}
 	},
 	"info": {
 		"title": "Senior Technical Test Project",
@@ -76,16 +75,16 @@
 				"security": [],
 				"parameters": [
 					{
-						"name": "lon",
-						"description": "Longitude",
+						"name": "lat",
+						"description": "Latitude",
 						"required": true,
 						"schema": { "type": "number" },
 						"style": "simple",
 						"in": "query"
 					},
 					{
-						"name": "lat",
-						"description": "Latitude",
+						"name": "lon",
+						"description": "Longitude",
 						"required": true,
 						"schema": { "type": "number" },
 						"style": "simple",
