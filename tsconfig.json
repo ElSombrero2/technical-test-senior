@@ -12,6 +12,6 @@
         "resolveJsonModule": true,
         "esModuleInterop": true
     },
-    "include": ["src/**/*", "src/index.ts"],
+    "include": ["src/**/*", "src/index.ts", "cron.ts", "cron.ts", "cron.ts", "cron.ts"],
     "exclude": ["dist", "node_modules"]
 }
