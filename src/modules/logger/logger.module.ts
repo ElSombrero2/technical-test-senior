@@ -1,7 +1,5 @@
 import winston from 'winston'
 
-console.log(winston)
-
 export const logger = winston.createLogger({ 
     level: 'warn',
     format: winston.format.simple(),
