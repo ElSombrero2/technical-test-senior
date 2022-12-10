@@ -6,7 +6,42 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-            
+			"DateTimeDto": {
+				"properties": {
+					"ts": { "type": "string" }
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FindAiryQualityDto": {
+				"properties": {
+					"_id": { "type": "string" },
+					"ts": { "type": "string" }, 
+					"aqius": { "type":"number" },
+					"mainus": { "type": "string" }, 
+					"aqicn": { "type":"number" },
+					"maincn": { "type": "string" }
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pollution": {
+				"properties": {
+					"pollution": {
+						"$ref": "#/components/schemas/FindAiryQualityDto"
+					}
+				}
+			},
+            "Result": {
+				"properties": {
+					"result": { 
+						"$ref": "#/components/schemas/Pollution"
+					}
+				},
+				"required": ["result"],
+				"type": "object",
+				"additionalProperties": false
+			}
 		},
 		"securitySchemes": {}
 	},
@@ -21,7 +56,86 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		
+		"/air/quality": {
+            "get": {
+				"tags": ["Air Quality"],
+				"operationId": "AirQuality-findAiryQuality",
+                "description": "Find Air Quality From Lat and Long",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+                                    "$ref": "#/components/schemas/Result"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"name": "lon",
+						"description": "Longitude",
+						"required": true,
+						"schema": { "type": "number" },
+						"style": "simple",
+						"in": "query"
+					},
+					{
+						"name": "lat",
+						"description": "Latitude",
+						"required": true,
+						"schema": { "type": "number" },
+						"style": "simple",
+						"in": "query"
+					}
+				]
+			}
+		},
+		"/air/paris": {
+            "get": {
+				"tags": ["Air Quality"],
+				"operationId": "AirQuality-findParis",
+                "description": "Find Air Quality for Paris",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+                                    "$ref": "#/components/schemas/Result"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/air/paris/most-polluate": {
+            "get": {
+				"tags": ["Air Quality"],
+				"operationId": "AirQuality-findParisMostPolluateDate",
+                "description": "Find Air Quality The date when Paris's air is the most polluate",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+                                    "$ref": "#/components/schemas/DateTimeDto"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
 	},
 	"servers": [
 		{

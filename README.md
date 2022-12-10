@@ -28,6 +28,7 @@ MONGODB_LOCAL_PORT = 27020
 EXPOSED_PORT = 8080
 APP_DATABASE = mongodb://root:technical-test@database:27017/app-database-docker?authSource=admin&readPreference=primary&ssl=false
 API_KEY = {API-KEY}
+BASE_URI = https://api.airvisual.com
 ```
 ## Install Packages
 
