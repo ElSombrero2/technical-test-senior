@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  database:
+    image: mongo:focal
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+    ports:
+      - $MONGODB_LOCAL_PORT:27017
+    volumes:
+      - ./data:/data/db
+  app:
+    depends_on:
+      - database
+    build: ./
+    env_file: ./.env
+    ports:
+      - $EXPOSED_PORT:8080
+    environment:
+      - APP_DATABASE=$APP_DATABASE
+      - APP_PORT=8080
+      - API_KEY=$API_KEY
+    volumes:
+      - ./logs:/opt/app/logs

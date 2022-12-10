@@ -1,0 +1,31 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+            
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "Senior Technical Test Project",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {},
+        "description": "This project is a technical Test project on senior Level"
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
