@@ -8,7 +8,8 @@
 		"schemas": {
 			"DateTimeDto": {
 				"properties": {
-					"ts": { "type": "string" }
+					"ts": { "type": "string" },
+					"_id": { "type": "string" }
 				},
 				"type": "object",
 				"additionalProperties": false
